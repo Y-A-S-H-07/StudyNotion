@@ -95,9 +95,19 @@ export default function Upload({
         ) : (
           <div
             className="flex w-full flex-col items-center p-6"
-            {...getRootProps()}
+            {...getRootProps({
+              onClick: () => inputRef.current.click(),
+            })}
           >
-            <input {...getInputProps()} ref={inputRef} />
+          
+            
+            <input
+              {...getInputProps()}
+              ref={inputRef}
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>

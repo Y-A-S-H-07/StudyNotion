@@ -81,6 +81,8 @@ export default function CourseInformationForm() {
   //   handle next button click
   const onSubmit = async (data) => {
     // console.log(data)
+    console.log("FULL DATA:", data);
+    console.log("IMAGE:", data.courseImage);
 
     if (editCourse) {
       // const currentValues = getValues()
