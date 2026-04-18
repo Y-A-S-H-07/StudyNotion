@@ -41,6 +41,7 @@ const VideoDetails = () => {
         )
         // console.log("filteredVideoData", filteredVideoData)
         setVideoData(filteredVideoData[0])
+        
         setPreviewSource(courseEntireData.thumbnail)
         setVideoEnded(false)
       }

@@ -70,6 +70,7 @@ export default function CoursesTable({ courses, setCourses }) {
             courses?.map((course) => (
               <Tr
                 key={course._id}
+                onClick={() => navigate(`/view-course/${course._id}`)}
                 className="flex gap-x-10 border-b border-richblack-800 px-6 py-8"
               >
                 <Td className="flex flex-1 gap-x-4">
