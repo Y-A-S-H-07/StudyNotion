@@ -135,21 +135,19 @@ function App() {
         </Route>
 
         {/* For the watching course lectures */}
-        <Route
+       <Route
           element={
             <PrivateRoute>
               <ViewCourse />
             </PrivateRoute>
           }
         >
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route
-                path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-                element={<VideoDetails />}
-              />
-            </>
-          )}
+          <Route path="view-course/:courseId" element={<VideoDetails />} />
+
+          <Route
+            path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
+            element={<VideoDetails />}
+          />
         </Route>
 
         {/* 404 Page */}
