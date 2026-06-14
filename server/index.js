@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
-		origin: "http://localhost:3000",
+		origin: ["http://localhost:3000", "http://10.208.17.60:3000"],
 		credentials: true,
 	})
 );
@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
 	});
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
 	console.log(`App is listening at ${PORT}`);
 });
 

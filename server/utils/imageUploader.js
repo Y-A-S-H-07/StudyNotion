@@ -4,8 +4,10 @@ exports.uploadImageToCloudinary = async (
   file,
   folder,
   height,
-  quality
+  quality,
+  resource_type = "image"
 ) => {
+
   const options = { folder }
 
   if (height) {
@@ -16,8 +18,7 @@ exports.uploadImageToCloudinary = async (
     options.quality = quality
   }
 
-  options.resource_type = "video"
-  options.format = "mp4"
+  options.resource_type = resource_type
 
   console.log("OPTIONS =>", options)
 
