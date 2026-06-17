@@ -20,6 +20,8 @@ StudyNotion is a full-stack EdTech platform built using the MERN stack that enab
 * Watch Course Videos
 * Rate and Review Courses
 * Manage Profile
+* Take AI-Generated Lecture Quizzes
+* View Quiz Score & Pass/Fail Results
 
 ### 👨‍🏫 Instructor Features
 
@@ -31,6 +33,16 @@ StudyNotion is a full-stack EdTech platform built using the MERN stack that enab
 * Manage Course Content
 * View Students Enrolled
 * Track Earnings
+* Automatic AI Quiz Generation for Every Lecture
+
+### 🤖 AI Features
+
+* AI-Powered Quiz Generation using Groq LLM
+* Automatic MCQ Creation During Lecture Upload
+* Lecture-Specific Quiz Generation
+* Instant Quiz Evaluation
+* Pass/Fail Assessment
+* Quiz Retake Support
 
 ### 🔐 Authentication Features
 
@@ -55,13 +67,11 @@ StudyNotion is a full-stack EdTech platform built using the MERN stack that enab
 
 ## 🏗️ System Architecture
 
-StudyNotion follows a client-server architecture consisting of:
-
 ### Frontend
 
 * React.js
 * Redux Toolkit
-* React Router
+* React Router DOM
 * Tailwind CSS
 
 ### Backend
@@ -78,9 +88,10 @@ StudyNotion follows a client-server architecture consisting of:
 
 ### Third-Party Services
 
-* Cloudinary (Media Storage)
-* Razorpay (Payments)
-* Nodemailer (Emails & OTP)
+* Cloudinary
+* Razorpay
+* Nodemailer
+* Groq AI
 
 ---
 
@@ -91,9 +102,9 @@ StudyNotion follows a client-server architecture consisting of:
 * React.js
 * Redux Toolkit
 * Tailwind CSS
-* React Icons
-* React Hot Toast
 * React Router DOM
+* React Hot Toast
+* React Icons
 
 ### Backend
 
@@ -103,6 +114,7 @@ StudyNotion follows a client-server architecture consisting of:
 * Bcrypt
 * Mongoose
 * Express File Upload
+* Groq SDK
 
 ### Database
 
@@ -113,6 +125,18 @@ StudyNotion follows a client-server architecture consisting of:
 * Cloudinary
 * Razorpay
 * Nodemailer
+* Groq AI
+
+---
+
+## 🤖 AI Quiz Workflow
+
+1. Instructor uploads a lecture.
+2. Lecture title and description are sent to Groq AI.
+3. AI generates multiple MCQ questions automatically.
+4. Questions are stored in MongoDB.
+5. Students can take lecture-specific quizzes.
+6. Quiz score, percentage, and pass/fail status are displayed instantly.
 
 ---
 
@@ -127,15 +151,17 @@ StudyNotion
 │   ├── middleware
 │   ├── models
 │   ├── routes
-│   └── utils
+│   ├── utils
+│   └── mail
 │
 ├── src
+│   ├── assets
 │   ├── components
+│   ├── hooks
 │   ├── pages
 │   ├── services
-│   ├── redux
-│   ├── hooks
-│   └── assets
+│   ├── slices
+│   └── utils
 │
 └── public
 ```
@@ -171,54 +197,8 @@ MAIL_PASS=your_app_password
 
 RAZORPAY_KEY=your_razorpay_key
 RAZORPAY_SECRET=your_razorpay_secret
-```
 
----
-
-## ⚙️ Installation & Setup
-
-### 1. Clone Repository
-
-```bash
-git clone https://github.com/Y-A-S-H-07/StudyNotion.git
-```
-
-```bash
-cd StudyNotion
-```
-
-### 2. Install Dependencies
-
-Frontend
-
-```bash
-npm install
-```
-
-Backend
-
-```bash
-cd server
-npm install
-```
-
-### 3. Start Backend
-
-```bash
-cd server
-npm start
-```
-
-### 4. Start Frontend
-
-```bash
-npm start
-```
-
-### 5. Open Application
-
-```bash
-http://localhost:3000
+GROQ_API_KEY=your_groq_api_key
 ```
 
 ---
@@ -244,6 +224,13 @@ GET  /api/v1/course/getAllCourses
 GET  /api/v1/course/getCourseDetails
 ```
 
+### Lecture Quiz APIs
+
+```http
+GET /api/v1/lecture-quiz/:subSectionId
+POST /api/v1/lecture-quiz/generate/:subSectionId
+```
+
 ### Payments
 
 ```http
@@ -253,35 +240,16 @@ POST /api/v1/payment/verifyPayment
 
 ---
 
-## 📸 Key Functionalities
-
-### Course Creation Flow
-
-1. Instructor creates course
-2. Upload thumbnail
-3. Add sections
-4. Add lectures/videos
-5. Publish course
-
-### Course Purchase Flow
-
-1. Student adds course to cart
-2. Razorpay checkout opens
-3. Payment verification
-4. Course enrollment
-5. Course available in dashboard
-
----
-
 ## 🚀 Future Enhancements
 
-* AI-powered course recommendations
-* Course completion certificates
-* Advanced analytics dashboard
-* Admin management panel
-* Course search filters
-* Real-time notifications
-* Live classes integration
+* AI Course Recommendations
+* AI Study Assistant Chatbot
+* Course Completion Certificates
+* Real-Time Notifications
+* Admin Dashboard
+* Live Classes Integration
+* Advanced Analytics
+* Personalized Learning Paths
 
 ---
 
@@ -289,8 +257,9 @@ POST /api/v1/payment/verifyPayment
 
 **Yash Dabhekar**
 
-* GitHub: https://github.com/Y-A-S-H-07
-* LinkedIn: [www.linkedin.com/in/yash-dabhekar-568267284](http://www.linkedin.com/in/yash-dabhekar-568267284)
+GitHub: https://github.com/Y-A-S-H-07
+
+LinkedIn: https://www.linkedin.com/in/yash-dabhekar-568267284
 
 ---
 
