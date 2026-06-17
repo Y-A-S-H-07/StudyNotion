@@ -1,181 +1,299 @@
-# 🚀 StudyNotion – EdTech Platform
+# 🚀 StudyNotion - Online Education Platform
 
-A full-stack EdTech platform where users can browse, purchase, and learn courses online.
-Built using the MERN stack with modern UI and real-world features like authentication, payments, and course management.
+StudyNotion is a full-stack EdTech platform built using the MERN stack that enables instructors to create and manage courses while allowing students to discover, purchase, and learn from educational content online.
 
 ---
 
-## 📌 Features
+## 🌟 Features
 
-### 👤 User Features
+### 👨‍🎓 Student Features
 
-* User Signup & Login (JWT Authentication)
+* User Registration & Login
+* JWT Authentication & Authorization
 * Email OTP Verification
 * Browse Courses by Category
-* Add to Cart & Purchase Courses
-* Enroll and Track Course Progress
-* View Enrolled Courses
+* Course Search & Discovery
+* Add Courses to Cart
+* Secure Course Purchase via Razorpay
+* Enroll in Courses
+* Track Course Progress
+* Watch Course Videos
+* Rate and Review Courses
+* Manage Profile
 
 ### 👨‍🏫 Instructor Features
 
-* Create & Manage Courses
-* Upload Videos & Thumbnails
+* Instructor Dashboard
+* Create & Publish Courses
+* Upload Course Thumbnails
+* Upload Video Lectures
 * Add Sections & Subsections
-* Instructor Dashboard (earnings & students)
+* Manage Course Content
+* View Students Enrolled
+* Track Earnings
 
-### 🛠️ Admin Features
+### 🔐 Authentication Features
 
-* Manage Categories
-* Control platform content
+* JWT-based Authentication
+* OTP Verification via Email
+* Forgot Password Functionality
+* Password Reset via Email
+
+### ☁️ Media Management
+
+* Cloudinary Integration
+* Video Upload Support
+* Image Upload Support
+
+### 💳 Payment Integration
+
+* Razorpay Payment Gateway
+* Secure Checkout Flow
+* Course Enrollment After Successful Payment
 
 ---
 
-## 🧱 Tech Stack
+## 🏗️ System Architecture
+
+StudyNotion follows a client-server architecture consisting of:
+
+### Frontend
+
+* React.js
+* Redux Toolkit
+* React Router
+* Tailwind CSS
+
+### Backend
+
+* Node.js
+* Express.js
+* REST APIs
+* JWT Authentication
+
+### Database
+
+* MongoDB Atlas
+* Mongoose ODM
+
+### Third-Party Services
+
+* Cloudinary (Media Storage)
+* Razorpay (Payments)
+* Nodemailer (Emails & OTP)
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
 
 * React.js
 * Redux Toolkit
 * Tailwind CSS
-* React Router
+* React Icons
+* React Hot Toast
+* React Router DOM
 
 ### Backend
 
 * Node.js
 * Express.js
+* JWT
+* Bcrypt
+* Mongoose
+* Express File Upload
 
 ### Database
 
 * MongoDB Atlas
 
-### Services
+### Cloud Services
 
-* Cloudinary (Media Upload)
-* Nodemailer (Email/OTP)
-* Razorpay (Payments)
+* Cloudinary
+* Razorpay
+* Nodemailer
 
 ---
 
-## ⚙️ Environment Setup
+## 📂 Project Structure
 
-### 🔹 Frontend (.env)
+```bash
+StudyNotion
+│
+├── server
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   └── utils
+│
+├── src
+│   ├── components
+│   ├── pages
+│   ├── services
+│   ├── redux
+│   ├── hooks
+│   └── assets
+│
+└── public
+```
+
+---
+
+## 🔑 Environment Variables
+
+### Frontend (.env)
 
 ```env
 REACT_APP_BASE_URL=http://localhost:4000/api/v1
+REACT_APP_RAZORPAY_KEY=your_razorpay_key
 ```
 
-### 🔹 Backend (server/.env)
+### Backend (server/.env)
 
 ```env
-MONGODB_URL=your_mongodb_atlas_url
-JWT_SECRET=your_secret_key
+PORT=4000
 
-CLOUD_NAME=your_cloud_name
-API_KEY=your_api_key
-API_SECRET=your_api_secret
+MONGODB_URL=your_mongodb_url
+
+JWT_SECRET=your_jwt_secret
+
+CLOUD_NAME=your_cloudinary_name
+API_KEY=your_cloudinary_api_key
+API_SECRET=your_cloudinary_secret
 FOLDER_NAME=studynotion
 
 MAIL_HOST=smtp.gmail.com
 MAIL_USER=your_email@gmail.com
 MAIL_PASS=your_app_password
 
-RAZORPAY_KEY=your_key
-RAZORPAY_SECRET=your_secret
+RAZORPAY_KEY=your_razorpay_key
+RAZORPAY_SECRET=your_razorpay_secret
 ```
 
 ---
 
-## ▶️ How to Run Locally
+## ⚙️ Installation & Setup
 
 ### 1. Clone Repository
 
 ```bash
-git clone <your-repo-url>
-cd studynotion-edtech-project-main
+git clone https://github.com/Y-A-S-H-07/StudyNotion.git
 ```
 
----
+```bash
+cd StudyNotion
+```
 
 ### 2. Install Dependencies
 
-#### Frontend
+Frontend
 
 ```bash
 npm install
 ```
 
-#### Backend
+Backend
 
 ```bash
 cd server
 npm install
 ```
 
----
-
-### 3. Run Project
-
-#### Start Backend
+### 3. Start Backend
 
 ```bash
 cd server
-npm run dev
+npm start
 ```
 
-#### Start Frontend
+### 4. Start Frontend
 
 ```bash
 npm start
 ```
 
----
+### 5. Open Application
 
-### 4. Open in Browser
-
-```
+```bash
 http://localhost:3000
 ```
 
 ---
 
-## 📂 Project Structure
+## 📡 Core API Endpoints
 
+### Authentication
+
+```http
+POST /api/v1/auth/signup
+POST /api/v1/auth/login
+POST /api/v1/auth/sendotp
+POST /api/v1/auth/reset-password-token
+POST /api/v1/auth/reset-password
 ```
-studynotion/
-├── server/        # Backend (Node + Express)
-├── src/           # Frontend (React)
-├── components/    # UI Components
-├── pages/         # Pages
-├── services/      # API calls
-├── redux/         # State management
+
+### Courses
+
+```http
+POST /api/v1/course/createCourse
+POST /api/v1/course/editCourse
+GET  /api/v1/course/getAllCourses
+GET  /api/v1/course/getCourseDetails
+```
+
+### Payments
+
+```http
+POST /api/v1/payment/capturePayment
+POST /api/v1/payment/verifyPayment
 ```
 
 ---
 
-## 🧪 API Example
+## 📸 Key Functionalities
 
-```
-GET /api/v1/course/showAllCategories
-```
+### Course Creation Flow
+
+1. Instructor creates course
+2. Upload thumbnail
+3. Add sections
+4. Add lectures/videos
+5. Publish course
+
+### Course Purchase Flow
+
+1. Student adds course to cart
+2. Razorpay checkout opens
+3. Payment verification
+4. Course enrollment
+5. Course available in dashboard
 
 ---
 
-## 🚧 Future Improvements
+## 🚀 Future Enhancements
 
-* Add real payment flow (Razorpay live)
-* Add admin dashboard UI
-* Improve UI/UX animations
-* Add search & filters
-* Deploy on AWS/Vercel
+* AI-powered course recommendations
+* Course completion certificates
+* Advanced analytics dashboard
+* Admin management panel
+* Course search filters
+* Real-time notifications
+* Live classes integration
 
 ---
 
 ## 👨‍💻 Author
 
-Yash Dabhekar
+**Yash Dabhekar**
+
+* GitHub: https://github.com/Y-A-S-H-07
+* LinkedIn: [www.linkedin.com/in/yash-dabhekar-568267284](http://www.linkedin.com/in/yash-dabhekar-568267284)
 
 ---
 
-## ⭐ If you like this project
+## ⭐ Support
 
-Give it a star on GitHub ⭐
+If you found this project helpful, please give it a ⭐ on GitHub and share it with others.
