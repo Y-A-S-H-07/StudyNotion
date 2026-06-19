@@ -185,6 +185,7 @@ const VideoDetails = () => {
       ) : (
         <>
           <video
+            key={subSectionId}
             ref={playerRef}
             width="100%"
             height="500"
@@ -195,7 +196,6 @@ const VideoDetails = () => {
             className="rounded-md"
           >
             <source src={videoData?.videoUrl} type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
 
           {videoEnded && (
@@ -259,6 +259,15 @@ const VideoDetails = () => {
           <p className="pt-2 pb-6">
             {videoData?.description}
           </p>
+
+          <button
+            onClick={() =>
+              navigate(`/lecture-quiz/${subSectionId}`)
+            }
+            className="rounded-md bg-yellow-50 px-4 py-2 font-semibold text-richblack-900"
+          >
+            Take AI Quiz
+          </button>
         </>
       )}
     </div>

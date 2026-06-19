@@ -35,6 +35,10 @@ import ViewCourse from "./pages/ViewCourse"
 import { getUserDetails } from "./services/operations/profileAPI"
 import { ACCOUNT_TYPE } from "./utils/constants"
 
+import Quiz from "./pages/Quiz"
+
+import LectureQuiz from "./pages/LectureQuiz"
+
 function App() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -52,6 +56,11 @@ function App() {
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
       <Navbar />
       <Routes>
+        <Route path="/quiz/:courseId" element={<Quiz />} />
+        <Route
+          path="/lecture-quiz/:subSectionId"
+          element={<LectureQuiz />}
+        />
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

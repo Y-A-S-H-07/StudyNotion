@@ -3,6 +3,13 @@ const Section = require("../models/Section")
 const SubSection = require("../models/Subsection")
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
 
+const Groq = require("groq-sdk")
+const LectureQuiz = require("../models/LectureQuiz")
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+})
+
 // Create a new sub-section for a given section
 exports.createSubSection = async (req, res) => {
   try {
@@ -35,12 +42,65 @@ exports.createSubSection = async (req, res) => {
       videoUrl: uploadDetails.secure_url,
     })
 
+    const completion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: `
+    Generate 5 MCQ questions.
+
+    Return ONLY valid JSON.
+
+    Format:
+    [
+    {
+      "question":"...",
+      "options":["A","B","C","D"],
+      "correctAnswer":0
+    }
+    ]
+
+    Title:
+    ${title}
+
+    Description:
+    ${description}
+    `,
+        },
+      ],
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.3,
+    })
+
+const responseText =
+  completion.choices[0].message.content
+
+const cleanedResponse = responseText
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim()
+
+const questions = JSON.parse(cleanedResponse)
+
+const lectureQuiz = await LectureQuiz.create({
+  subsection: SubSectionDetails._id,
+  questions,
+})
+
+SubSectionDetails.quiz = lectureQuiz._id
+await SubSectionDetails.save()
+
     // Update the corresponding section with the newly created sub-section
     const updatedSection = await Section.findByIdAndUpdate(
       { _id: sectionId },
       { $push: { subSection: SubSectionDetails._id } },
       { new: true }
-    ).populate("subSection")
+    ).populate({
+      path: "subSection",
+      populate: {
+        path: "quiz",
+      },
+    })
 
     // Return the updated section in the response
     return res.status(200).json({ success: true, data: updatedSection })
